@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ObjectAnimation stores a list of sprites and its delay between frames (in seconds), as well as a calculated value for the entire animation's timing
+/// </summary>
 [System.Serializable]
 public class ObjectAnimation
 {

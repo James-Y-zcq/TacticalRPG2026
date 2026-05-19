@@ -831,7 +831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DebugView
   debugViewParent: {fileID: 901666524}
-  tilePosition: {fileID: 182225090}
+  debugText: {fileID: 0}
 --- !u!1 &1087093756
 GameObject:
   m_ObjectHideFlags: 0
@@ -4732,7 +4732,7 @@ GameObject:
   - component: {fileID: 2129949238}
   - component: {fileID: 2129949237}
   m_Layer: 0
-  m_Name: Player
+  m_Name: TestUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4783,11 +4783,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -214430771
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4795,7 +4795,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!114 &2129949238
 MonoBehaviour:
@@ -4809,10 +4809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096c3579c32e0d24282d73955d5b5847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSpriteHandler
-  currentSprite: {fileID: 0}
-  characterRenderer: {fileID: 2129949237}
   animationState: 0
-  spAttackAnimations: []
 --- !u!114 &2129949239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4829,6 +4826,7 @@ MonoBehaviour:
   targetTile: {fileID: 0}
   movementOrders: []
   spriteHandler: {fileID: 2129949238}
+  defaultBase: {fileID: 11400000, guid: d16ef53d8a266a146a3384f80e9a73c6, type: 2}
 --- !u!4 &2129949240
 Transform:
   m_ObjectHideFlags: 0
@@ -4838,8 +4836,8 @@ Transform:
   m_GameObject: {fileID: 2129949236}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3362, y: -0.10756, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

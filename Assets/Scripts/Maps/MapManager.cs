@@ -104,6 +104,20 @@ public class MapManager : MonoBehaviour
         corners.Add(tiles[tiles.Count - 1].transform.position);
         return corners;
     }
+
+    public bool TryGetOverlayTile(Vector2 tilePosition, out OverlayTile overlayTile)
+    {
+        overlayTile = null;
+
+        if (map == null)
+        {
+            return false;
+        }
+
+        Vector2Int tileKey = new Vector2Int(Mathf.RoundToInt(tilePosition.x), Mathf.RoundToInt(tilePosition.y));
+        return map.TryGetValue(tileKey, out overlayTile);
+    }
+
     void DrawPathLine(List<Vector2> cornerPoints)
     {
         if (cornerPoints.Count < 2)

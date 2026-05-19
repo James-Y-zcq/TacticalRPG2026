@@ -1,2 +1,2 @@
 # TacticalRPG2026
-Tactical RPG made by me and Dragonfruit for a Summer '26 project
+Tactical RPG made as part of the SGD Fall '26 semester.

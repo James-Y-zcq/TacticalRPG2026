@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class CharacterSpriteHandler : MonoBehaviour
 {
-    [SerializeField] Sprite currentSprite;
-    [SerializeField] SpriteRenderer characterRenderer;
+    private Sprite currentSprite;
+    private SpriteRenderer characterRenderer;
     
     public CharacterAnimationState animationState;
     
-    [Header("Animations")]
-    [SerializeField] ObjectAnimation idle;
-    [SerializeField] ObjectAnimation talkingAnimation;
-    [SerializeField] ObjectAnimation walkCycleAnimation;
-    [SerializeField] ObjectAnimation meleeAnimation;
-    [SerializeField] List<ObjectAnimation> spAttackAnimations;
+    ObjectAnimation idle;
+    ObjectAnimation talkingAnimation;
+    ObjectAnimation walkCycleAnimation;
+    ObjectAnimation meleeAnimation;
+    ObjectAnimation rangedAnimation;
+
+    //init function to be used by the FieldCharacter
+    public void Setup(CombatSpriteDepot depot)
+    {
+        idle = depot.Idle;
+        walkCycleAnimation = depot.Walking;
+        meleeAnimation = depot.MeleeBase;
+        rangedAnimation = depot.RangedBase;
+
+        animationState = CharacterAnimationState.Idle;
+    }
 
     public IEnumerator playOneshotAnimation(ObjectAnimation animation)
     {
@@ -41,7 +51,8 @@ public class CharacterSpriteHandler : MonoBehaviour
             yield return null;
         }
     }
-
+    
+    //TODO: make this logic functional
     public IEnumerator loopAnimation(ObjectAnimation animation)
     {
         yield return null;
