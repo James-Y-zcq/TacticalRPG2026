@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -57,12 +58,20 @@ public class MapManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Destroys the rendered line segments for a pathfinding line renderer
+    /// </summary>
+    public void destroyPathfindingArrows()
+    {
+        DestroyAllChildrenOfGameobject(arrowParent.gameObject);
+    }
+
+    /// <summary>
     /// Given a list of overlay tiles, computes corner points and draws a dynamic path line.
     /// </summary>
     /// <param name="tiles"></param>
     public void drawPathfindingArrows(List<OverlayTile> tiles)
     {
-        DestroyAllChildrenOfGameobject(arrowParent.gameObject);
+        destroyPathfindingArrows();
 
         if (tiles == null || tiles.Count == 0)
         {

@@ -36,21 +36,30 @@ public class MouseController : MonoBehaviour
 
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
+                MapManager.i.destroyPathfindingArrows();
+                
                 cachedTileTest = overlayTile.GetComponent<OverlayTile>(); //assign the cached tile test
                 cachedTileTest?.ShowTile();
 
                 movementSourceTile = overlayTile.GetComponent<OverlayTile>();
+
+                //see if there is a resting object.
+                if(cachedTileTest.RestingObject != null)
+                {
+                    //if so, make it display in the worldObjectPreviewUI
+                    WorldObjectPreviewUI.i.displayObject(cachedTileTest.RestingObject);
+                    cachedTileTest.RestingObject.onLeftClick();
+                }
+                else
+                {
+                    WorldObjectPreviewUI.i.hideMenu();
+                }
             }
             if (Mouse.current.rightButton.wasReleasedThisFrame && cachedTileTest != null)
             {
                 //generate a path from the cursorHighlightSprite.position to the clicked position
                 rightClickedTile = overlayTile.GetComponent<OverlayTile>();
                 var path = pathFinder.FindPath(cachedTileTest, rightClickedTile);
-
-                // foreach(var tile in path)
-                // {
-                //     tile.ShowTile();
-                // }
 
                 MapManager.i.drawPathfindingArrows(path); //draw the pathfinding arrows
             }

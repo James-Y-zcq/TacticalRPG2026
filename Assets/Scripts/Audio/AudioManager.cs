@@ -55,7 +55,9 @@ public class AudioManager : MonoBehaviour
 public enum AudioId
 {
     //put audioIDs here
-    testBlip
+    testBlip,
+    playerPartySelect,
+    enemyCharacterSelect
 }
 
 [System.Serializable]

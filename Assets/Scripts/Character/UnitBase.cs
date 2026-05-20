@@ -9,6 +9,10 @@ public class UnitBase : ScriptableObject
     [SerializeField] string unitName;
     [SerializeField] CombatSpriteDepot combatSprites;
 
+    [Header("Panel View Data")]
+    [TextArea(3,5)] [SerializeField] string unitDescription;
+    [SerializeField] Sprite portraitSprite;
+
     [SerializeField] int vitality;
     [SerializeField] int agility;
     [SerializeField] int strength;
@@ -18,6 +22,8 @@ public class UnitBase : ScriptableObject
     //getters
     public string UnitName {get {return unitName;}}
     public CombatSpriteDepot CombatSprites {get {return combatSprites;}}
+    public string UnitDescription {get {return unitDescription;}}
+    public Sprite PortraitSprite {get {return portraitSprite;}}
 
     public int Vitality {get {return vitality;}}
     public int Agility {get {return agility;}}

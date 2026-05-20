@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// CombatSpriteDepot stores idle, melee, ranged etc. sprite animations. Room for expansion is left in

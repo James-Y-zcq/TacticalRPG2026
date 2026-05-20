@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,9 @@ using UnityEngine;
 /// <summary>
 /// The graphical frontend of a combat unit.
 /// </summary>
-public class FieldCharacter : MonoBehaviour
+public class FieldCharacter : MonoBehaviour, ObjectHP
 {
+    #region Fields
     [SerializeField] OverlayTile tilePosition;
     [SerializeField] OverlayTile targetTile;
     [SerializeField] List<Vector2> movementOrders;
@@ -17,9 +19,10 @@ public class FieldCharacter : MonoBehaviour
 
     [SerializeField] UnitBase defaultBase;
     private Unit unit;
-
-    private static Vector2 positionalOffset = new Vector2(0, 0.25f); //change to make it so positions reflect properly on the isometric grid
-
+    
+    private static Vector2 positionalOffset = new Vector2(0, 0.25f); //change to make it so character positions reflect properly on the isometric grid
+    #endregion
+    #region Setup
     void Start()
     {
         SetupUnit(defaultBase, 4 * Vector2.one);
@@ -32,7 +35,8 @@ public class FieldCharacter : MonoBehaviour
 
         SetTilePosition(tilePosition);
     }
-
+    #endregion
+    #region Tile Movement
     public void SetTilePosition(Vector2 tilePosition)
     {
         // null check for map manager
@@ -51,6 +55,10 @@ public class FieldCharacter : MonoBehaviour
 
         this.tilePosition = currentTile;
         targetTile = currentTile;
+        
+        if(currentTile != null)
+            currentTile.SetRestingObject(this); //set the current tile as its resting object
+        
         transform.position = (Vector2)currentTile.transform.position + positionalOffset;
     }
 
@@ -88,4 +96,21 @@ public class FieldCharacter : MonoBehaviour
 
         movementOrders.Clear();
     }
+    #endregion
+    #region MapObject and HP implementation
+    public void onLeftClick()
+    {
+        //play a sound effect for clicking on a party member based on its party affiliation
+    }
+    public string exposeObjectInfo(out Sprite windowSprite, out string description)
+    {
+        windowSprite = unit._base.PortraitSprite;
+        description = unit._base.UnitDescription;
+        return unit._base.UnitName;
+    }
+    public IEnumerator TakeDamage(int taken)
+    {
+        throw new NotImplementedException();
+    }
+    #endregion
 }
