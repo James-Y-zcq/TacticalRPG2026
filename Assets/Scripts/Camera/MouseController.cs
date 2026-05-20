@@ -1,26 +1,24 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MouseController : MonoBehaviour
 {
+    #region fields
+    public static MouseController i;
     private PathFinder pathFinder;
 
-    private OverlayTile cachedTileTest;
-
-    private OverlayTile rightClickedTile;
-    private OverlayTile movementSourceTile;
-
+    private OverlayTile cachedTile;
+    public event Action<BattleState> updateBattleState;
+    #endregion
+    
     void Awake()
     {
+        i = this;
         pathFinder = new PathFinder();
     }
-    void Update()
-    {
-
-    }
-
-    void LateUpdate()
+    public void HandleUpdate(BattleState battleState)
     {
         if (Mouse.current == null || Camera.main == null)
         {
@@ -32,40 +30,39 @@ public class MouseController : MonoBehaviour
         if (focusedTileHit.HasValue)
         {
             GameObject overlayTile = focusedTileHit.Value.collider.gameObject;
+            cachedTile = overlayTile.GetComponent<OverlayTile>(); //assign the cached tile test
             transform.position = overlayTile.transform.position;
 
-            if (Mouse.current.leftButton.wasPressedThisFrame)
+            if(cachedTile != null)
             {
-                MapManager.i.destroyPathfindingArrows();
-                
-                cachedTileTest = overlayTile.GetComponent<OverlayTile>(); //assign the cached tile test
-                cachedTileTest?.ShowTile();
-
-                movementSourceTile = overlayTile.GetComponent<OverlayTile>();
-
-                //see if there is a resting object.
-                if(cachedTileTest.RestingObject != null)
-                {
-                    //if so, make it display in the worldObjectPreviewUI
-                    WorldObjectPreviewUI.i.displayObject(cachedTileTest.RestingObject);
-                    cachedTileTest.RestingObject.onLeftClick();
-                }
-                else
-                {
-                    WorldObjectPreviewUI.i.hideMenu();
-                }
-            }
-            if (Mouse.current.rightButton.wasReleasedThisFrame && cachedTileTest != null)
-            {
-                //generate a path from the cursorHighlightSprite.position to the clicked position
-                rightClickedTile = overlayTile.GetComponent<OverlayTile>();
-                var path = pathFinder.FindPath(cachedTileTest, rightClickedTile);
-
-                MapManager.i.drawPathfindingArrows(path); //draw the pathfinding arrows
+                HandleFocusedTile(battleState);
             }
         }
     }
+    private void HandleFocusedTile(BattleState battleState)
+    {
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            cachedTile?.ShowTile();
 
+            //see if there is a resting object.
+            if (cachedTile.RestingObject != null)
+            {
+                //if so, make it display in the worldObjectPreviewUI
+                WorldObjectPreviewUI.i.displayObject(cachedTile.RestingObject);
+
+                //if it is a fieldCharacter party-controlled, and the battlestate is SelectPartyMember, select it and update the battlemanager's state.
+            }
+            else
+            {
+                WorldObjectPreviewUI.i.hideMenu();
+            }
+        }
+        if (Mouse.current.rightButton.wasReleasedThisFrame && cachedTile != null)
+        {
+            
+        }
+    }
     public RaycastHit2D? GetFocusedOnTile()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -78,10 +75,5 @@ public class MouseController : MonoBehaviour
         }
 
         return null;
-    }
-
-    private void PlaceCharacterOnTile(OverlayTile tile, FieldCharacter character)
-    {
-        character.transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y + 0.25f, tile.transform.position.z);
     }
 }

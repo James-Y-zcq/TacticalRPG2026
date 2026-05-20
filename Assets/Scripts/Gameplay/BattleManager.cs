@@ -6,14 +6,25 @@ using UnityEngine;
 public class BattleManager : MonoBehaviour
 {
     public static BattleManager i;
+    public BattleState battleState { get; private set; }
     void Awake()
     {
-        if(i==null) i = this;
+        if (i == null) i = this;
+        MouseController.i.updateBattleState += UpdateBattleState;
     }
-    
+
     void Update()
     {
-        
+        MouseController.i.HandleUpdate(battleState);
+    }
+
+    /// <summary>
+    /// Setter for battle state. Not called directly. Use event Action<BattleState> instead.
+    /// </summary>
+    /// <param name="state"></param>
+    private void UpdateBattleState(BattleState state)
+    {
+        battleState = state;
     }
 }
 

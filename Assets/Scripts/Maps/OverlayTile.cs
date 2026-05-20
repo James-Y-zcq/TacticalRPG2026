@@ -41,4 +41,8 @@ public class OverlayTile : MonoBehaviour
     {
         restingObject = mObject;
     }
+    public void ClearRestingObject()
+    {
+        restingObject = null;
+    }
 }

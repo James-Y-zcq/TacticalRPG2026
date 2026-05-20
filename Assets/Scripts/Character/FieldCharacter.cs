@@ -61,9 +61,18 @@ public class FieldCharacter : MonoBehaviour, ObjectHP
         
         transform.position = (Vector2)currentTile.transform.position + positionalOffset;
     }
+    /// <summary>
+    /// Receives a list of corner points for movement, and then calls FollowPath to lerp to each of those points.
+    /// </summary>
+    /// <param name="points"></param>
+    public void setMoveOrders(List<Vector2> points)
+    {
+        movementOrders = points;
 
+        StartCoroutine(FollowPath());
+    }
     private float moveDuration = 0.15f;
-    public IEnumerator FollowPath(){ //coroutine to follow a path
+    private IEnumerator FollowPath(){ //coroutine to follow a path
         if (movementOrders == null || movementOrders.Count == 0)
         {
             yield break; //early termination
@@ -98,10 +107,6 @@ public class FieldCharacter : MonoBehaviour, ObjectHP
     }
     #endregion
     #region MapObject and HP implementation
-    public void onLeftClick()
-    {
-        //play a sound effect for clicking on a party member based on its party affiliation
-    }
     public string exposeObjectInfo(out Sprite windowSprite, out string description)
     {
         windowSprite = unit._base.PortraitSprite;
