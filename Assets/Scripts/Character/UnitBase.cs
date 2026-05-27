@@ -21,6 +21,8 @@ public class UnitBase : ScriptableObject
     [SerializeField] int dexterity;
     [SerializeField] int tactics;
 
+    [SerializeField] int unitMaintenance;
+
     [Header("Base Equipment")]
     [SerializeField] UnitArmor startingArmor;
     
@@ -38,6 +40,8 @@ public class UnitBase : ScriptableObject
     public int Strength { get { return strength; } }
     public int Dexterity { get { return dexterity; } }
     public int Tactics { get { return tactics; } }
+
+    public int UnitMaintenance => unitMaintenance;
 
     public UnitArmor StartingArmor { get { return startingArmor; } }
 }
