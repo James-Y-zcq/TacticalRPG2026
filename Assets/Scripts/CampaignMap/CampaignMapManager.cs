@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CampaignMapManager : MonoBehaviour
 {
@@ -19,11 +20,26 @@ public class CampaignMapManager : MonoBehaviour
     {
         if(i==null)
             i = this;
+        
+        SetupCampaign("BRE");
     }
 
     void Update()
     {
-        //handles the highlightedregion logic
+        if (Mouse.current == null || Camera.main == null)
+        {
+            return;
+        }
+
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Collider2D regionCollider = Physics2D.OverlapPoint(worldPosition);
+        Region hoveredRegion = regionCollider != null ? regionCollider.GetComponent<Region>() : null;
+
+        if (hoveredRegion != highlightedRegion)
+        {
+            UpdateRegion(hoveredRegion);
+        }
 
     }
 

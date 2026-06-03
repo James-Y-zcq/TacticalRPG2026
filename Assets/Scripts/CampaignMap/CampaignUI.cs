@@ -11,6 +11,6 @@ public class CampaignUI : MonoBehaviour
     #endregion
     public void updateHighlightedRegionUI(Region region)
     {
-        regionText.text = $"{region.RegionName}";
+        regionText.text = region != null ? $"{region.RegionName}" : string.Empty;
     }
 }

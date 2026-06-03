@@ -17,9 +17,9 @@ MonoBehaviour:
   factionAdjective: Breksvutt
   factionBanner: {fileID: 0}
   startingRegions:
-  - Dol
-  - Val
-  - Sta
-  mapColor: {r: 1, g: 0.4854527, b: 0, a: 1}
+  - DOL
+  - VAL
+  - STA
+  mapColor: {r: 0.9716981, g: 0.7244597, b: 0.49043253, a: 1}
   secondaryColor: {r: 1, g: 0.8266371, b: 0.6650944, a: 1}
   acceptedCultures: 0100000000000000

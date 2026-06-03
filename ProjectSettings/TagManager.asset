@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: MapBackground
+    uniqueID: 2957796055
+    locked: 0
+  - name: RegionSprite
+    uniqueID: 2415569295
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

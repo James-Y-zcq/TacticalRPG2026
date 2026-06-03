@@ -20,8 +20,6 @@ public class Region : MonoBehaviour
     public void InitializeRegion()
     {
         regionRenderer = GetComponent<SpriteRenderer>();
-
-        regionRenderer.color = Color.forestGreen;
     }
 
     void Start()
@@ -44,7 +42,9 @@ public class Region : MonoBehaviour
     /// <param name="faction"></param>
     public void UpdateOwner(MapFaction faction)
     {
-        owner.LoseRegion(this);
+        if(owner != null)
+            owner.LoseRegion(this);
+        
         owner = faction;
 
         UpdateRegionColor(owner.fBase.MapColor);

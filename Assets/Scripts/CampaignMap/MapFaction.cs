@@ -14,6 +14,8 @@ public class MapFaction
     public MapFaction(MapFactionBase fBase)
     {
         this.fBase = fBase;
+        ownedRegions = new List<Region>();
+        fieldArmies = new List<FieldArmy>();
     }
 
     public void OccupyRegion(Region region)

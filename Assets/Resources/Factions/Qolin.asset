@@ -10,21 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee98be8c9975af4ca2162fc210c0c03, type: 3}
-  m_Name: Omnia
+  m_Name: Qolin
   m_EditorClassIdentifier: Assembly-CSharp::MapFactionBase
-  factionTag: OMN
-  factionName: House Omnia
-  factionAdjective: Omnian
+  factionTag: QOL
+  factionName: Qolin
+  factionAdjective: Qolin
   factionBanner: {fileID: 0}
   startingRegions:
-  - ALA
-  - MEA
-  - ERI
-  - POB
-  - SIL
-  - TOL
-  - SAM
-  - LIR
-  mapColor: {r: 0.745283, g: 0.5730242, b: 0.73270935, a: 1}
-  secondaryColor: {r: 1, g: 0.5707547, b: 0.96553516, a: 1}
-  acceptedCultures: 0300000000000000
+  - QOL
+  mapColor: {r: 0.5137255, g: 0.5803922, b: 1, a: 1}
+  secondaryColor: {r: 0.514151, g: 0.58194387, b: 1, a: 1}
+  acceptedCultures: 00000000

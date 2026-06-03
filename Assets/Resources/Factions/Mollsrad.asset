@@ -10,21 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee98be8c9975af4ca2162fc210c0c03, type: 3}
-  m_Name: Omnia
+  m_Name: Mollsrad
   m_EditorClassIdentifier: Assembly-CSharp::MapFactionBase
-  factionTag: OMN
-  factionName: House Omnia
-  factionAdjective: Omnian
+  factionTag: MOL
+  factionName: Mollsrad
+  factionAdjective: Mollsrad
   factionBanner: {fileID: 0}
   startingRegions:
-  - ALA
-  - MEA
-  - ERI
-  - POB
-  - SIL
-  - TOL
-  - SAM
-  - LIR
-  mapColor: {r: 0.745283, g: 0.5730242, b: 0.73270935, a: 1}
-  secondaryColor: {r: 1, g: 0.5707547, b: 0.96553516, a: 1}
-  acceptedCultures: 0300000000000000
+  - MOL
+  mapColor: {r: 0.7962169, g: 0.8509804, b: 0.70980394, a: 1}
+  secondaryColor: {r: 0.7960785, g: 0.85098046, b: 0.70980394, a: 1}
+  acceptedCultures: 00000000
