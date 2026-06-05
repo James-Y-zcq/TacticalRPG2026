@@ -8,6 +8,7 @@ public class CampaignUI : MonoBehaviour
 {
     #region UI elements
     [SerializeField] TMP_Text regionText;
+    [SerializeField] RegionDetailsMenu regionDetails;
     #endregion
 
     /// <summary>
@@ -21,5 +22,17 @@ public class CampaignUI : MonoBehaviour
             regionText.text = region != null ? $"{region.RegionName}" : string.Empty;
         else if(currentMode == Mapmode.terrain)
             regionText.text = region != null ? $"{region.RegionName} : {region.RegionalTerrain.TerrainName}" : string.Empty;
+    }
+
+    public void showRegionDetails(Region region)
+    {
+        regionDetails.enableDetailsGraphics(true);
+
+        regionDetails.showRegionDetails(region.RegionName, region.LocalNoble.NobleName, region.currentPopulation, region.RegionalBanner);
+    }
+
+    public void hideRegionDetails()
+    {
+        regionDetails.enableDetailsGraphics(false);
     }
 }

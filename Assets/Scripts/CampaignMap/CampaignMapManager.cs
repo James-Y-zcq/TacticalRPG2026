@@ -48,6 +48,14 @@ public class CampaignMapManager : MonoBehaviour
         {
             UpdateRegion(hoveredRegion);
         }
+
+        if (Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            if (hoveredRegion != null)
+                campaignUI.showRegionDetails(hoveredRegion);
+            else
+                campaignUI.hideRegionDetails();
+        }
     }
 
     /// <summary>

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1afc34a85f7a0f241be0d19158b4e7ed, type: 3}
-  m_Name: Farmland
+  m_Name: Scrub
   m_EditorClassIdentifier: Assembly-CSharp::RegionalTerrain
   regionalMaterial: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
-  terrainName: Farmland
-  backgroundColor: {r: 0.9716981, g: 0.8769743, b: 0.24292453, a: 1}
+  terrainName: Scrub
+  backgroundColor: {r: 0.36900747, g: 0.4811321, b: 0.36538804, a: 1}

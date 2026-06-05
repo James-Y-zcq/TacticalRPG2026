@@ -6,14 +6,21 @@ public class Region : MonoBehaviour
 {
     [SerializeField] private string regionCode;
     [SerializeField] private string regionName;
-    [SerializeField] List<Region> borderingRegions; //the list of regions that are accessible to this one.
-    public FieldArmy occupyingArmy {get; private set;}
+    [SerializeField] List<Region> borderingRegions; //the list of regions that are bordering this one.
+    public FieldArmy occupyingArmy { get; private set; }
     private SpriteRenderer regionRenderer;
     public string RegionCode => regionCode;
     public string RegionName => regionName;
-    public MapFaction owner {get; private set;}
+    public MapFaction owner { get; private set; }
     [SerializeField] RegionalTerrain regionalTerrain;
     public RegionalTerrain RegionalTerrain => regionalTerrain;
+
+    [SerializeField] int startingPopulation;
+    [SerializeField] Sprite regionalBanner;
+    public Sprite RegionalBanner => regionalBanner;
+    public int currentPopulation;
+    [SerializeField] Noble localNoble;
+    public Noble LocalNoble => localNoble;
     /// <summary>
     /// sets up the region for use in the campaign map.
     /// </summary>
@@ -42,9 +49,9 @@ public class Region : MonoBehaviour
     /// <param name="faction"></param>
     public void UpdateOwner(MapFaction faction)
     {
-        if(owner != null)
+        if (owner != null)
             owner.LoseRegion(this);
-        
+
         owner = faction;
 
         UpdateRegionColor(owner.fBase.MapColor);

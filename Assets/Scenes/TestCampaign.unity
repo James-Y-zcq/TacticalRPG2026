@@ -119,6 +119,84 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &123211151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 123211152}
+  - component: {fileID: 123211154}
+  - component: {fileID: 123211153}
+  m_Layer: 5
+  m_Name: RegionalBanner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &123211152
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123211151}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1405699898}
+  - {fileID: 1858082767}
+  - {fileID: 1823521961}
+  m_Father: {fileID: 1300408959}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &123211153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123211151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &123211154
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123211151}
+  m_CullTransparentMesh: 1
 --- !u!1 &123894689
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +344,7 @@ GameObject:
   - component: {fileID: 233787189}
   - component: {fileID: 233787190}
   m_Layer: 0
-  m_Name: region5
+  m_Name: Pobin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -446,7 +524,11 @@ MonoBehaviour:
   regionCode: POB
   regionName: Pobin
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: 584df521867d21f47984d352991d26d1, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: b9f122a45e885624dabc4f5256eab69b, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &419798457
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +542,7 @@ GameObject:
   - component: {fileID: 419798460}
   - component: {fileID: 419798461}
   m_Layer: 0
-  m_Name: region8
+  m_Name: Starais
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,7 +732,11 @@ MonoBehaviour:
   regionCode: STA
   regionName: Starais
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: fd0be93b2b062d943a484ca2ccfc86fd, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: 2346c0a2b8b868a43b802cedef357db8, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &540691841
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +750,7 @@ GameObject:
   - component: {fileID: 540691844}
   - component: {fileID: 540691845}
   m_Layer: 0
-  m_Name: region13
+  m_Name: Lirinode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -826,7 +912,11 @@ MonoBehaviour:
   regionCode: LIR
   regionName: Lirinonde
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: b9f122a45e885624dabc4f5256eab69b, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: 2346c0a2b8b868a43b802cedef357db8, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &585285946
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +930,7 @@ GameObject:
   - component: {fileID: 585285949}
   - component: {fileID: 585285950}
   m_Layer: 0
-  m_Name: region9
+  m_Name: Doleb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1049,7 +1139,11 @@ MonoBehaviour:
   regionCode: DOL
   regionName: Doleb
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: fd0be93b2b062d943a484ca2ccfc86fd, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: 584df521867d21f47984d352991d26d1, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &675922015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,7 +1248,7 @@ GameObject:
   - component: {fileID: 711396971}
   - component: {fileID: 711396972}
   m_Layer: 0
-  m_Name: region14
+  m_Name: Mean
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1338,7 +1432,11 @@ MonoBehaviour:
   regionCode: MEA
   regionName: Mean
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: b9f122a45e885624dabc4f5256eab69b, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: 584df521867d21f47984d352991d26d1, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &716901499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,7 +1603,7 @@ GameObject:
   - component: {fileID: 841881030}
   - component: {fileID: 841881031}
   m_Layer: 0
-  m_Name: region1
+  m_Name: Toleis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1691,6 +1789,10 @@ MonoBehaviour:
   regionName: Toleis
   borderingRegions: []
   regionalTerrain: {fileID: 11400000, guid: b9f122a45e885624dabc4f5256eab69b, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &871272118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,6 +1891,7 @@ RectTransform:
   m_Children:
   - {fileID: 956912530}
   - {fileID: 1680095061}
+  - {fileID: 1325298586}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1809,6 +1912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CampaignUI
   regionText: {fileID: 956912531}
+  regionDetails: {fileID: 1325298587}
 --- !u!114 &871272124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1837,7 +1941,7 @@ GameObject:
   - component: {fileID: 951247718}
   - component: {fileID: 951247719}
   m_Layer: 0
-  m_Name: region4
+  m_Name: Mollsrad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2002,7 +2106,11 @@ MonoBehaviour:
   regionCode: MOL
   regionName: Mollsrad
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: e1de3dfc0984b5b4a926ba32b736fa36, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: b0a93b3d5310a67469f182965e3129af, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 5000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &956912529
 GameObject:
   m_ObjectHideFlags: 0
@@ -2153,7 +2261,7 @@ GameObject:
   - component: {fileID: 959488578}
   - component: {fileID: 959488579}
   m_Layer: 0
-  m_Name: region6
+  m_Name: Silas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2332,7 +2440,11 @@ MonoBehaviour:
   regionCode: SIL
   regionName: Silas
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: b9f122a45e885624dabc4f5256eab69b, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: b0a93b3d5310a67469f182965e3129af, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &1111526040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,7 +2458,7 @@ GameObject:
   - component: {fileID: 1111526043}
   - component: {fileID: 1111526044}
   m_Layer: 0
-  m_Name: region11
+  m_Name: Terra Incognita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2589,6 +2701,10 @@ MonoBehaviour:
   regionName: Terra Incognita
   borderingRegions: []
   regionalTerrain: {fileID: 11400000, guid: 248557cca2961b84292ea1226236247e, type: 2}
+  startingPopulation: -1
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &1155775398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,6 +2750,136 @@ Transform:
   - {fileID: 711396970}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1300408958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1300408959}
+  - component: {fileID: 1300408961}
+  - component: {fileID: 1300408960}
+  m_Layer: 5
+  m_Name: GraphicsParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1300408959
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300408958}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 123211152}
+  m_Father: {fileID: 1325298586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 450, y: 600}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1300408960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300408958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 5a7e67ea7a2455d408b513cee056dfde, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1300408961
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300408958}
+  m_CullTransparentMesh: 1
+--- !u!1 &1325298585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1325298586}
+  - component: {fileID: 1325298587}
+  m_Layer: 5
+  m_Name: RegionInformationMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1325298586
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325298585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1300408959}
+  m_Father: {fileID: 871272122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1325298587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325298585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b83598ac705aa4996eca8bfcbbae23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RegionDetailsMenu
+  RegionNameText: {fileID: 1405699899}
+  localNobleText: {fileID: 1858082768}
+  populationText: {fileID: 1823521962}
+  bannerImage: {fileID: 123211153}
+  graphicsParent: {fileID: 1300408958}
 --- !u!1 &1346816246
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,7 +2893,7 @@ GameObject:
   - component: {fileID: 1346816249}
   - component: {fileID: 1346816250}
   m_Layer: 0
-  m_Name: region10
+  m_Name: Qolin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2831,7 +3077,150 @@ MonoBehaviour:
   regionCode: QOL
   regionName: Qolin
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: e1de3dfc0984b5b4a926ba32b736fa36, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: a543ac9864e49b24b8f644fb3c2767e8, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
+--- !u!1 &1405699897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1405699898}
+  - component: {fileID: 1405699900}
+  - component: {fileID: 1405699899}
+  m_Layer: 5
+  m_Name: RegionName
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1405699898
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405699897}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 123211152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -125}
+  m_SizeDelta: {x: 250, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1405699899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405699897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'RegionName
+
+'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1405699900
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405699897}
+  m_CullTransparentMesh: 1
 --- !u!1 &1493580214
 GameObject:
   m_ObjectHideFlags: 0
@@ -2845,7 +3234,7 @@ GameObject:
   - component: {fileID: 1493580217}
   - component: {fileID: 1493580218}
   m_Layer: 0
-  m_Name: region3
+  m_Name: Eriny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3027,6 +3416,10 @@ MonoBehaviour:
   regionName: Eriny
   borderingRegions: []
   regionalTerrain: {fileID: 11400000, guid: b9f122a45e885624dabc4f5256eab69b, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &1551888691
 GameObject:
   m_ObjectHideFlags: 0
@@ -3120,7 +3513,7 @@ GameObject:
   - component: {fileID: 1607979086}
   - component: {fileID: 1607979087}
   m_Layer: 0
-  m_Name: region7
+  m_Name: Samosthe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3290,7 +3683,11 @@ MonoBehaviour:
   regionCode: SAM
   regionName: Samosthe
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: 607726d5ebf45d04387ee44c067925ec, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: b9f122a45e885624dabc4f5256eab69b, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
 --- !u!1 &1680095060
 GameObject:
   m_ObjectHideFlags: 0
@@ -3406,7 +3803,7 @@ GameObject:
   - component: {fileID: 1696291318}
   - component: {fileID: 1696291319}
   m_Layer: 0
-  m_Name: region2
+  m_Name: Alazac
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3589,7 +3986,148 @@ MonoBehaviour:
   regionCode: ALA
   regionName: Alazac
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: 8e42b6805fa0d6e4cb70333ef2f16bcf, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: b0a93b3d5310a67469f182965e3129af, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
+--- !u!1 &1823521960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1823521961}
+  - component: {fileID: 1823521963}
+  - component: {fileID: 1823521962}
+  m_Layer: 5
+  m_Name: Population
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1823521961
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823521960}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 123211152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -190}
+  m_SizeDelta: {x: 300, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1823521962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823521960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Population: XXXX'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 15
+  m_fontSizeBase: 15
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1823521963
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823521960}
+  m_CullTransparentMesh: 1
 --- !u!1 &1840962779
 GameObject:
   m_ObjectHideFlags: 0
@@ -3603,7 +4141,7 @@ GameObject:
   - component: {fileID: 1840962782}
   - component: {fileID: 1840962783}
   m_Layer: 0
-  m_Name: region12
+  m_Name: Valken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3791,7 +4329,148 @@ MonoBehaviour:
   regionCode: VAL
   regionName: Valken
   borderingRegions: []
-  regionalTerrain: {fileID: 11400000, guid: 607726d5ebf45d04387ee44c067925ec, type: 2}
+  regionalTerrain: {fileID: 11400000, guid: 2346c0a2b8b868a43b802cedef357db8, type: 2}
+  startingPopulation: 3000
+  regionalBanner: {fileID: 0}
+  currentPopulation: 1000
+  localNoble: {fileID: 11400000, guid: 159f10acca05b0b4f814b6707a1fb0ba, type: 2}
+--- !u!1 &1858082766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1858082767}
+  - component: {fileID: 1858082769}
+  - component: {fileID: 1858082768}
+  m_Layer: 5
+  m_Name: LocalNobility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1858082767
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858082766}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 123211152}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -160}
+  m_SizeDelta: {x: 300, y: 25}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1858082768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858082766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Local Noble: Lord XXX HouseName'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 15
+  m_fontSizeBase: 15
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1858082769
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858082766}
+  m_CullTransparentMesh: 1
 --- !u!1 &1975269309
 GameObject:
   m_ObjectHideFlags: 0
