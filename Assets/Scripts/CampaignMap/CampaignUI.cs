@@ -9,6 +9,8 @@ public class CampaignUI : MonoBehaviour
     #region UI elements
     [SerializeField] TMP_Text regionText;
     [SerializeField] RegionDetailsMenu regionDetails;
+    [SerializeField] TMP_Text yearText;
+    [SerializeField] int startingYear;
     #endregion
 
     /// <summary>
@@ -34,5 +36,13 @@ public class CampaignUI : MonoBehaviour
     public void hideRegionDetails()
     {
         regionDetails.enableDetailsGraphics(false);
+    }
+    /// <summary>
+    /// takes an internal turncount from the campaignmanager and formats it as a year on the world's calendar.
+    /// </summary>
+    /// <param name="turnCount"></param>
+    public void updateYearText(int turnCount)
+    {
+        yearText.text = $"{turnCount + startingYear} P.E.";
     }
 }

@@ -10,14 +10,15 @@ public class CampaignMapManager : MonoBehaviour
     [SerializeField] List<MapFactionBase> factionBases;
     private List<MapFaction> factions;
     private MapFaction playerFaction;
-
+    private int turnCount = 0; //starts at zero
     private Region highlightedRegion;
 
     [Header("Globally Accessible Fields")]
     public List<Region> regionList => regions;
     [SerializeField] Material defaultRegionMaterial; //should just be sprite unlit default
     public Material DefaultRegionMaterial => defaultRegionMaterial;
-
+    public FieldArmy selectedArmy {get; private set;} //an army that is currently selected
+    public MapCity selectedCity {get; private set;} //a settlement that is currently selected
     #endregion
 
     #region Helper Scripts
@@ -30,6 +31,8 @@ public class CampaignMapManager : MonoBehaviour
             i = this;
 
         SetupCampaign("BRE");
+
+        campaignUI.updateYearText(turnCount);
     }
 
     void Update()
@@ -51,10 +54,14 @@ public class CampaignMapManager : MonoBehaviour
 
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
-            if (hoveredRegion != null)
+            if (hoveredRegion != null && selectedArmy == null && selectedCity == null)
                 campaignUI.showRegionDetails(hoveredRegion);
             else
                 campaignUI.hideRegionDetails();
+        }
+        else if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            campaignUI.hideRegionDetails(); //should never show details after a left click
         }
     }
 
