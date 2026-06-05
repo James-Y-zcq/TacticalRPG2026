@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class CampaignMapManager : MonoBehaviour
 {
+    #region fields
     public static CampaignMapManager i;
     [SerializeField] List<Region> regions;
     [SerializeField] List<MapFactionBase> factionBases;
@@ -12,15 +13,22 @@ public class CampaignMapManager : MonoBehaviour
 
     private Region highlightedRegion;
 
+    [Header("Globally Accessible Fields")]
+    public List<Region> regionList => regions;
+    [SerializeField] Material defaultRegionMaterial; //should just be sprite unlit default
+    public Material DefaultRegionMaterial => defaultRegionMaterial;
+
+    #endregion
+
     #region Helper Scripts
     [SerializeField] CampaignUI campaignUI;
     #endregion
 
     void Awake()
     {
-        if(i==null)
+        if (i == null)
             i = this;
-        
+
         SetupCampaign("BRE");
     }
 
@@ -40,13 +48,16 @@ public class CampaignMapManager : MonoBehaviour
         {
             UpdateRegion(hoveredRegion);
         }
-
     }
 
+    /// <summary>
+    /// updates the currently cached "highlighted region" inside of the CampaignMapManager
+    /// </summary>
+    /// <param name="region"></param>
     public void UpdateRegion(Region region)
     {
         highlightedRegion = region;
-        campaignUI.updateHighlightedRegionUI(region);
+        campaignUI.updateHighlightedRegionUI(region, MapmodeManager.i.mapmode);
     }
 
     /// <summary>
@@ -61,13 +72,13 @@ public class CampaignMapManager : MonoBehaviour
         mapRegions = new Dictionary<string, Region>();
         factionDictionary = new Dictionary<string, MapFaction>();
 
-        foreach(var region in regions)
+        foreach (var region in regions)
         {
             region.InitializeRegion();
             mapRegions.Add(region.RegionCode, region);
         }
-        
-        foreach(var faction in factionBases)
+
+        foreach (var faction in factionBases)
         {
             MapFaction mFaction = new MapFaction(faction); //construct a new faction from its base
 
@@ -81,7 +92,7 @@ public class CampaignMapManager : MonoBehaviour
             factionDictionary.Add(mFaction.fBase.FactionTag, mFaction);//also add it to the faction dictionary
 
             //now assign owned regions to the faction
-            foreach(string region in mFaction.fBase.StartingRegions)
+            foreach (string region in mFaction.fBase.StartingRegions)
             {
                 mFaction.OccupyRegion(mapRegions[region]); //update using the dictionary
             }

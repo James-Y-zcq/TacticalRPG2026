@@ -1,29 +1,42 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MapmodeManager : MonoBehaviour
 {
-    public mapmode mapmode {get; private set;}
+    public static MapmodeManager i;
+    void Awake()
+    {
+        if (i == null) i = this;
+    }
+    public Mapmode mapmode { get; private set; }
+    public List<Region> gameRegions => CampaignMapManager.i.regionList;
 
     /// <summary>
-    /// branching if-statement that handles a varied mapmode.
+    /// branching if-statement that handles a change in mapmode.
     /// </summary>
     /// <param name="mode"></param>
-    public void updateMapmode(mapmode mode)
+    public void updateMapmode(Mapmode mode)
     {
         this.mapmode = mode;
 
-        if(this.mapmode == mapmode.political)
+        if (this.mapmode == Mapmode.political)
         {
-            
+            foreach (var region in gameRegions)
+            {
+                region.recolorPolitical(); //recolor each region by owner.
+            }
         }
-        else if(mapmode == mapmode.terrain)
+        else if (mapmode == Mapmode.terrain)
         {
-            
+            foreach (var region in gameRegions)
+            {
+                region.recolorTerrain();
+            }
         }
     }
 }
 
-public enum mapmode
+public enum Mapmode
 {
     political,
     terrain

@@ -9,8 +9,17 @@ public class CampaignUI : MonoBehaviour
     #region UI elements
     [SerializeField] TMP_Text regionText;
     #endregion
-    public void updateHighlightedRegionUI(Region region)
+
+    /// <summary>
+    /// updates the highlighted region UI. Content changes based on the current mapmode.
+    /// </summary>
+    /// <param name="region"></param>
+    /// <param name="currentMode"></param>
+    public void updateHighlightedRegionUI(Region region, Mapmode currentMode)
     {
-        regionText.text = region != null ? $"{region.RegionName}" : string.Empty;
+        if(currentMode == Mapmode.political)
+            regionText.text = region != null ? $"{region.RegionName}" : string.Empty;
+        else if(currentMode == Mapmode.terrain)
+            regionText.text = region != null ? $"{region.RegionName} : {region.RegionalTerrain.TerrainName}" : string.Empty;
     }
 }

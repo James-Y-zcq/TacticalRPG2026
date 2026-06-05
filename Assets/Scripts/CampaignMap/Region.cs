@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(SpriteRenderer))] //require a spriterenderer on every Region.
 public class Region : MonoBehaviour
@@ -13,7 +12,8 @@ public class Region : MonoBehaviour
     public string RegionCode => regionCode;
     public string RegionName => regionName;
     public MapFaction owner {get; private set;}
-    
+    [SerializeField] RegionalTerrain regionalTerrain;
+    public RegionalTerrain RegionalTerrain => regionalTerrain;
     /// <summary>
     /// sets up the region for use in the campaign map.
     /// </summary>
@@ -54,15 +54,23 @@ public class Region : MonoBehaviour
     {
         CampaignMapManager.i.UpdateRegion(this); //update the current highlighted region
     }
-}
 
-public enum RegionTerrain
-{
-    Grassland,
-    Coastal,
-    Mountain,
-    Desert,
-    Wetland,
-    Village,
-    City
+    /// <summary>
+    /// recolor this region to match its realm's primary color.
+    /// </summary>
+    public void recolorPolitical()
+    {
+        UpdateRegionColor(owner.fBase.MapColor);
+    }
+
+    /// <summary>
+    /// recolor this region to match appropriate terrain graphics.
+    /// </summary>
+    public void recolorTerrain()
+    {
+        UpdateRegionColor(regionalTerrain.BackgroundColor);
+
+        //apply the material associated with the terrain
+        regionRenderer.material = regionalTerrain.RegionalMaterial;
+    }
 }

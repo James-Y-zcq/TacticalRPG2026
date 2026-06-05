@@ -20,7 +20,7 @@ public class MapFaction
 
     public void OccupyRegion(Region region)
     {
-        ownedRegions.Add(region); //add to the list of the 
+        ownedRegions.Add(region); //add to the list of owned regions
         region.UpdateOwner(this); //update the owner on the region's end
     }
     
