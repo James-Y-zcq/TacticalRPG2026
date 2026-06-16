@@ -7,7 +7,7 @@ using UnityEngine;
 public class MapCity : MonoBehaviour
 {
     public int recruitablePopulation {get; private set;}
-    public List<CityBuilding> buildings;
+    [SerializeField] public List<CityBuilding> buildings;
 
     /// <summary>
     /// sets up a city for use on the campaign map

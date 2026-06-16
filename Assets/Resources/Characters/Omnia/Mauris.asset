@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0ee298ace0ca024d8e67762bec347d2, type: 3}
-  m_Name: Zaiharam
-  m_EditorClassIdentifier: Assembly-CSharp::NobleHouse
-  houseName: Zaiharam
-  characters: []
-  headOfHouse: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b4ecb71912c2dbf4a9e138bdb2d51000, type: 3}
+  m_Name: Mauris
+  m_EditorClassIdentifier: Assembly-CSharp::Noble
+  nobleName: 
+  house: {fileID: 0}
+  mother: {fileID: 0}
+  father: {fileID: 0}
+  age: 0
+  male: 0

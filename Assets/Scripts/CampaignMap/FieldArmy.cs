@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class FieldArmy : MonoBehaviour
 {
-    private List<CampaignUnit> units;
+    public List<CampaignUnit> units {get; private set;}
     public Region currentRegion {get; private set;}
-
+    private MapFaction owner;
+    
     /// <summary>
     /// updates the current region the unit is in.
     /// </summary>
@@ -29,6 +30,15 @@ public class FieldArmy : MonoBehaviour
         }
 
         return totalMaintenance;
+    }
+
+    /// <summary>
+    /// Sets up a fieldarmy for use after its creation in a city.
+    /// </summary>
+    /// <param name="owner"></param>
+    public void initializeArmy(MapFaction owner)
+    {
+        
     }
 }
 

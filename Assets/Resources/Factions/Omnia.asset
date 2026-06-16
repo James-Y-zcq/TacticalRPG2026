@@ -15,7 +15,7 @@ MonoBehaviour:
   factionTag: OMN
   factionName: House Omnia
   factionAdjective: Omnian
-  factionBanner: {fileID: 0}
+  factionBanner: {fileID: 21300000, guid: 648d5e9414a22a149bb19fc32e6d75a5, type: 3}
   startingRegions:
   - ALA
   - MEA

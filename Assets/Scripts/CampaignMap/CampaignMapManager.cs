@@ -13,12 +13,18 @@ public class CampaignMapManager : MonoBehaviour
     private int turnCount = 0; //starts at zero
     private Region highlightedRegion;
 
+    [SerializeField] Transform unitParent;
+    [SerializeField] Transform cityParent;
+
     [Header("Globally Accessible Fields")]
     public List<Region> regionList => regions;
     [SerializeField] Material defaultRegionMaterial; //should just be sprite unlit default
     public Material DefaultRegionMaterial => defaultRegionMaterial;
     public FieldArmy selectedArmy {get; private set;} //an army that is currently selected
     public MapCity selectedCity {get; private set;} //a settlement that is currently selected
+
+    public List<FieldArmy> fieldArmies {get; private set;}
+    public List<MapCity> cities {get; private set;}
     #endregion
 
     #region Helper Scripts
@@ -83,9 +89,13 @@ public class CampaignMapManager : MonoBehaviour
     {
         i = this;
 
+        //initializing various lists
         factions = new List<MapFaction>();
         mapRegions = new Dictionary<string, Region>();
         factionDictionary = new Dictionary<string, MapFaction>();
+
+        fieldArmies = new List<FieldArmy>();
+        cities = new List<MapCity>();
 
         foreach (var region in regions)
         {
