@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapFactionBase
   factionTag: TER
   factionName: Terra Incognita
-  factionAdjective: Off-Map
+  factionAdjective: Unknown Peoples
   factionBanner: {fileID: 0}
   startingRegions:
   - TER

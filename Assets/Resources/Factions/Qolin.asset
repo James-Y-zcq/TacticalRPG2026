@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapFactionBase
   factionTag: QOL
   factionName: Qolin
-  factionAdjective: Qolin
+  factionAdjective: of House Qolin
   factionBanner: {fileID: 0}
   startingRegions:
   - QOL

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapFactionBase
   factionTag: MOL
   factionName: Mollsrad
-  factionAdjective: Mollsrad
+  factionAdjective: Mollsradii
   factionBanner: {fileID: 0}
   startingRegions:
   - MOL

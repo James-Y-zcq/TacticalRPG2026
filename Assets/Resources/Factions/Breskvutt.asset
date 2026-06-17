@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapFactionBase
   factionTag: BRE
   factionName: House Breskvutt
-  factionAdjective: Breksvutt
+  factionAdjective: of House Breksvutt
   factionBanner: {fileID: 0}
   startingRegions:
   - DOL

@@ -1,12 +1,18 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class FieldArmy : MonoBehaviour
+public class FieldArmy : MonoBehaviour, IPointerEnterHandler
 {
-    public List<CampaignUnit> units {get; private set;}
+    [SerializeField] public List<CampaignUnit> units;
     public Region currentRegion {get; private set;}
-    private MapFaction owner;
+    public MapFaction owner {get; private set;}
+    [SerializeField] private Noble general;
+    public Noble General => general; //for read-only UI purposes
     
+    [SerializeField] string startingRegion;
+    [SerializeField] string startingOwner;
     /// <summary>
     /// updates the current region the unit is in.
     /// </summary>
@@ -36,20 +42,29 @@ public class FieldArmy : MonoBehaviour
     /// Sets up a fieldarmy for use after its creation in a city.
     /// </summary>
     /// <param name="owner"></param>
-    public void initializeArmy(MapFaction owner)
+    public void initializeArmy()
     {
-        
+        this.owner = CampaignMapManager.i.getFactionByCode(startingOwner);
+        this.currentRegion = CampaignMapManager.i.getRegionByCode(startingRegion);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("FieldArmy mouse entered");
+        CampaignMapManager.i.UpdateArmy(this);
     }
 }
+
 
 /// <summary>
 /// stores the details of a single unit in an army for use on the campaign map
 /// </summary>
+[Serializable]
 public class CampaignUnit
 {
-    private UnitArmor armor;
-    private float unitHealth; //health of the unit after various battles
-    private UnitBase attachedUnit; //the associated unitBase for this CampaignUnit
+    [SerializeField] private UnitArmor armor;
+    [SerializeField] private float unitHealth; //health of the unit after various battles
+    [SerializeField] private UnitBase attachedUnit; //the associated unitBase for this CampaignUnit
 
     /// <summary>
     /// setter for the unit's armor.

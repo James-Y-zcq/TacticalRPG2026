@@ -21,6 +21,7 @@ public class Region : MonoBehaviour
     public int currentPopulation;
     [SerializeField] Noble localNoble;
     public Noble LocalNoble => localNoble;
+
     /// <summary>
     /// sets up the region for use in the campaign map.
     /// </summary>
@@ -55,11 +56,6 @@ public class Region : MonoBehaviour
         owner = faction;
 
         UpdateRegionColor(owner.fBase.MapColor);
-    }
-
-    public void OnMouseEnter()
-    {
-        CampaignMapManager.i.UpdateRegion(this); //update the current highlighted region
     }
 
     /// <summary>

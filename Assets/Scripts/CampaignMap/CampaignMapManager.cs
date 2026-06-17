@@ -8,10 +8,14 @@ public class CampaignMapManager : MonoBehaviour
     public static CampaignMapManager i;
     [SerializeField] List<Region> regions;
     [SerializeField] List<MapFactionBase> factionBases;
+    [SerializeField] List<FieldArmy> startingArmies;
+    [SerializeField] List<MapCity> startingCities;
     private List<MapFaction> factions;
     private MapFaction playerFaction;
     private int turnCount = 0; //starts at zero
     private Region highlightedRegion;
+    private FieldArmy highlightedArmy;
+    private MapCity highlightedCity;
 
     [SerializeField] Transform unitParent;
     [SerializeField] Transform cityParent;
@@ -22,7 +26,6 @@ public class CampaignMapManager : MonoBehaviour
     public Material DefaultRegionMaterial => defaultRegionMaterial;
     public FieldArmy selectedArmy {get; private set;} //an army that is currently selected
     public MapCity selectedCity {get; private set;} //a settlement that is currently selected
-
     public List<FieldArmy> fieldArmies {get; private set;}
     public List<MapCity> cities {get; private set;}
     #endregion
@@ -50,10 +53,24 @@ public class CampaignMapManager : MonoBehaviour
 
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        Collider2D regionCollider = Physics2D.OverlapPoint(worldPosition);
-        Region hoveredRegion = regionCollider != null ? regionCollider.GetComponent<Region>() : null;
+        Collider2D objectCollider = Physics2D.OverlapPoint(worldPosition);
 
-        if (hoveredRegion != highlightedRegion)
+        //check for: army, then city, then region in that order.
+        FieldArmy hoveredArmy = objectCollider != null ? objectCollider.GetComponent<FieldArmy>() : null;
+
+        MapCity hoveredCity = hoveredArmy == null && (objectCollider != null) ? objectCollider.GetComponent<MapCity>() : null;
+        
+        Region hoveredRegion = hoveredCity == null && (objectCollider != null) ? objectCollider.GetComponent<Region>() : null;
+
+        if(hoveredArmy != null && hoveredArmy != highlightedArmy)
+        {
+            UpdateArmy(hoveredArmy);
+        }
+        else if(hoveredCity != null && hoveredCity != highlightedCity)
+        {
+            UpdateCity(hoveredCity);
+        }
+        else if (hoveredRegion != null && hoveredRegion != highlightedRegion)
         {
             UpdateRegion(hoveredRegion);
         }
@@ -68,6 +85,24 @@ public class CampaignMapManager : MonoBehaviour
         else if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             campaignUI.hideRegionDetails(); //should never show details after a left click
+
+            //check if either an army or city are selected. If so, select the army.
+            if(highlightedArmy != null)
+            {
+                selectedArmy = highlightedArmy;
+                //null out the selected city in this scenario
+                selectedCity = null;
+                campaignUI.placeHighlightCursor(selectedArmy.transform);
+            }
+            else if(highlightedCity != null)
+            {
+                selectedCity = highlightedCity;
+                campaignUI.placeHighlightCursor(selectedCity.transform);
+            }
+            else
+            {
+                campaignUI.disableHighlightCursor();
+            }
         }
     }
 
@@ -78,7 +113,33 @@ public class CampaignMapManager : MonoBehaviour
     public void UpdateRegion(Region region)
     {
         highlightedRegion = region;
+        highlightedArmy = null;
+        highlightedCity = null;
         campaignUI.updateHighlightedRegionUI(region, MapmodeManager.i.mapmode);
+    }
+
+    /// <summary>
+    /// updates the cached hovered army, in similar function to UpdateRegion.
+    /// </summary>
+    /// <param name="army"></param>
+    public void UpdateArmy(FieldArmy army)
+    {
+        highlightedArmy = army;
+        highlightedRegion = null;
+        highlightedCity = null;
+        campaignUI.updateHighlightedArmyUI(army);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="city"></param>
+    public void UpdateCity(MapCity city)
+    {
+        highlightedCity = city;
+        highlightedRegion = null;
+        highlightedRegion = null;
+        campaignUI.updateHighlightedCityUI(city);
     }
 
     /// <summary>
@@ -95,6 +156,7 @@ public class CampaignMapManager : MonoBehaviour
         factionDictionary = new Dictionary<string, MapFaction>();
 
         fieldArmies = new List<FieldArmy>();
+        fieldArmies.AddRange(startingArmies); //add all starting armies to the field armies list.
         cities = new List<MapCity>();
 
         foreach (var region in regions)
@@ -122,6 +184,18 @@ public class CampaignMapManager : MonoBehaviour
                 mFaction.OccupyRegion(mapRegions[region]); //update using the dictionary
             }
         }
+
+        foreach(var city in startingCities)
+        {
+            city.initCity();
+            cities.Add(city);
+        }
+
+        //call init on all FieldArmies on the map.
+        foreach(var army in fieldArmies)
+        {
+            army.initializeArmy();
+        }
     }
 
     /// <summary>
@@ -133,4 +207,19 @@ public class CampaignMapManager : MonoBehaviour
     /// Dictionary that returns a MapFaction from its factionCode. 
     /// </summary>
     private Dictionary<string, MapFaction> factionDictionary;
+
+    //null-checked getters for the dictionaries:
+    public MapFaction getFactionByCode(string code)
+    {
+        if (factionDictionary.ContainsKey(code))
+            return factionDictionary[code];
+        else return null;
+    }
+
+    public Region getRegionByCode(string code)
+    {
+        if(mapRegions.ContainsKey(code))
+            return mapRegions[code];
+        else return null;
+    }
 }
