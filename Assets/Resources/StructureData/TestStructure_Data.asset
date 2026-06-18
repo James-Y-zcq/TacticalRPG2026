@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0fe864827acd244fb77439b19306752, type: 3}
+  m_Name: TestStructure_Data
+  m_EditorClassIdentifier: Assembly-CSharp::StructureData
+  tilePalette:
+  - {fileID: -2086362078, guid: 605956ca47e57094ead722fe83bf8955, type: 3}
+  - {fileID: -1155829395, guid: 605956ca47e57094ead722fe83bf8955, type: 3}
+  - {fileID: -1131822478, guid: 605956ca47e57094ead722fe83bf8955, type: 3}
+  - {fileID: -1917061882, guid: 605956ca47e57094ead722fe83bf8955, type: 3}
+  - {fileID: 1762762016, guid: 605956ca47e57094ead722fe83bf8955, type: 3}
+  layers:
+  - columns:
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: 00000000010000000100000001000000ffffffffffffffffffffffff01000000010000000100000002000000ffffffff
+    - rows: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    - rows: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  - columns:
+    - rows: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000ffffffff
+    - rows: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+  - columns:
+    - rows: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    - rows: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+    - rows: ffffffffffffffffffffffff03000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffff04000000
+  footprint: {x: 13, y: 12}
