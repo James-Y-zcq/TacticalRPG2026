@@ -54,9 +54,6 @@ public class StructureBaker
                 tilemap.CompressBounds();
                 BoundsInt bounds = tilemap.cellBounds;
 
-                //skip empty tiles
-                if (bounds.size.x == 0 || bounds.size.y == 0) continue;
-
                 if (bounds.xMin < minX) minX = bounds.xMin;
                 if (bounds.yMin < minY) minY = bounds.yMin;
                 if (bounds.xMax > maxX) maxX = bounds.xMax;
@@ -83,12 +80,21 @@ public class StructureBaker
             {
                 //create the layerdata struct
                 LayerData layerData = new LayerData { columns = new List<ColumnData>() };
+
+                bool isLayerEmpty = (tilemap.cellBounds.size.x == 0 || tilemap.cellBounds.size.y == 0);
+
                 for (int x = 0; x < width; x++)
                 {
                     ColumnData columnData = new ColumnData { rows = new List<int>() };
 
                     for (int y = 0; y < length; y++)
                     {
+                        if (isLayerEmpty)
+                        {
+                            columnData.rows.Add(-1);
+                            continue; 
+                        }
+
                         //find the tilemap position on the grid
                         Vector3Int gridPos = new Vector3Int(minX + x, minY + y, 0);
 
