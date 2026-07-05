@@ -2125,7 +2125,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1591
 --- !u!114 &1044631470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4530,7 +4530,7 @@ TilemapRenderer:
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0.25, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
@@ -4704,8 +4704,8 @@ MonoBehaviour:
   - {fileID: 455649763}
   - {fileID: 1017330452}
   - {fileID: 465127752}
-  testStructure: {fileID: 11400000, guid: c57b68f1c5598b346b8d9ae8002531ec, type: 2}
-  testOrigin: {x: 15, y: 0, z: 0}
+  testStructure: {fileID: 11400000, guid: 3086e1e01dd6b8946bc3fde056f11c07, type: 2}
+  testOrigin: {x: 3, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

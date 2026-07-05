@@ -26,6 +26,11 @@ public abstract class CityBuilding : ScriptableObject
     [SerializeField] int buildingMaintenance;
 
     /// <summary>
+    /// The StructureData of the building.
+    /// </summary>
+    [SerializeField] StructureData buildingData;
+
+    /// <summary>
     /// Called at the end of a turn to see if it has some passive impact. Used for population growth, etc.
     /// </summary>
     public abstract void endTurnImpact();
@@ -39,4 +44,5 @@ public abstract class CityBuilding : ScriptableObject
     public int ConstructionCost {get {return constructionCost;}}
     public int ConstructionTime {get {return constructionTime;}}
     public int BuildingMaintenance {get {return buildingMaintenance;}}
+    public StructureData BuildingData {get {return buildingData;}}
 }
