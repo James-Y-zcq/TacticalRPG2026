@@ -4530,7 +4530,7 @@ TilemapRenderer:
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0.25, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 3
@@ -4651,6 +4651,7 @@ GameObject:
   - component: {fileID: 1744886086515633694}
   - component: {fileID: 2234062349877405983}
   - component: {fileID: 9032263105616284351}
+  - component: {fileID: 9032263105616284352}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -4706,6 +4707,28 @@ MonoBehaviour:
   - {fileID: 465127752}
   testStructure: {fileID: 11400000, guid: 3086e1e01dd6b8946bc3fde056f11c07, type: 2}
   testOrigin: {x: 3, y: 0, z: 0}
+--- !u!114 &9032263105616284352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438528337831218598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf7a71197b2bdaa46a76433b64ccc306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapGenerator
+  cityWidth: 64
+  cityLength: 64
+  riverChunk: {fileID: 0}
+  wallChunk: {fileID: 0}
+  gatehouseChunk: {fileID: 0}
+  roadChunk: {fileID: 0}
+  bridgeChunk: {fileID: 0}
+  buildingPrefabs: []
+  placementAttemptsPerBuilding: 50
+  totalBuildingsToSpawn: 30
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

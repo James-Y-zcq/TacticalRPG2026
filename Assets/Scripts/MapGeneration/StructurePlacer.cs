@@ -11,7 +11,7 @@ public class StructurePlacer : MonoBehaviour
 
     [Header("Tilemaps")]
     [Tooltip("Place the scene tilemaps here, where index 0 is structure layer 0, etc.")]
-    [SerializeField] List<Tilemap> targetTileMaps;
+    [SerializeField] public List<Tilemap> targetTileMaps;
 
     //A dictionary for mapping sprites to Unity tiles quickly.
     private Dictionary<Sprite, Tile> tileCache = new Dictionary<Sprite, Tile>();
@@ -111,7 +111,7 @@ public class StructurePlacer : MonoBehaviour
     }
     
     [ContextMenu("Clear All Layers")]
-    private void clearTestTilemaps()
+    public void clearTestTilemaps()
     {
         if (targetTileMaps == null || targetTileMaps.Count == 0)
         {
