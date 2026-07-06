@@ -15,8 +15,12 @@ public class ProceduralCityGenerator : MonoBehaviour
     public int cityWidth = 64;
     public int cityLength = 64;
 
+    [Header("Outskirt and Terrain Settings")]
+    [SerializeField] Vector2Int landSize;
+    [SerializeField] BiomePalette biomePalette;
+
     [Header("River Settings")]
-    [SerializeField] bool riverEnabled = false;
+    [SerializeField] bool riverEnabled = true;
     public RiverDirection riverDirection = RiverDirection.North;
     [Range(0f, 1f)]
     [Tooltip("Probability of the river turning perpendicularly. Diagonals meander automatically.")]
@@ -25,11 +29,13 @@ public class ProceduralCityGenerator : MonoBehaviour
     [Header("4x4 Chunk Data")]
     public StructureData riverChunk;
     public StructureData wallChunk;
+    private StructureData wallCorner;
     public StructureData gatehouseChunk;
     public StructureData roadChunk;
     public StructureData bridgeChunk;
 
     [Header("Buildings")]
+    [SerializeField] bool walledCity = true;
     public List<StructureData> buildingPrefabs;
     [Tooltip("How many times to attempt placing a building before giving up.")]
     public int placementAttemptsPerBuilding = 50;
@@ -56,7 +62,7 @@ public class ProceduralCityGenerator : MonoBehaviour
     {
         if (placer == null) placer = GetComponent<StructurePlacer>();
 
-        //Init the empty grid
+        // 1. Initialize empty grid
         cityGrid = new CellType[cityWidth, cityLength];
         placementQueue.Clear();
 
@@ -66,13 +72,19 @@ public class ProceduralCityGenerator : MonoBehaviour
             if (tm != null) tm.ClearAllTiles();
         }
 
-        //Determine placements internally
-        GenerateRiver();
-        GenerateWallsAndGates();
+        // 2. Generate Layout Math
+        if (riverEnabled) GenerateRiver();
+        if (walledCity) GenerateWallsAndGates();
+        
+        if (biomePalette != null && biomePalette.GroundComposition != null && biomePalette.GroundComposition.tilePatterns != null)
+        {
+            GenerateGround();
+        }
+
         GenerateMainRoads();
         GenerateBuildings();
 
-        //Execute the placement queue to paint the map visually
+        // 3. Execute Placements visually
         foreach (PlacementJob job in placementQueue)
         {
             placer.PlaceStructure(job.data, job.position);
@@ -81,9 +93,83 @@ public class ProceduralCityGenerator : MonoBehaviour
         Debug.Log($"City generated with {placementQueue.Count} total structures.");
     }
 
+    private void GenerateGround()
+    {
+        if (biomePalette == null || biomePalette.GroundComposition == null) return;
+
+        var patterns = biomePalette.GroundComposition.tilePatterns;
+        var percentages = biomePalette.GroundComposition.percentages;
+
+        // Safety check to ensure arrays align
+        if (patterns == null || percentages == null || patterns.Count == 0 || patterns.Count != percentages.Count)
+        {
+            Debug.LogWarning("BiomePalette tile patterns and percentages are mismatched or empty.");
+            return;
+        }
+
+        // If landSize is left at (0,0), safely fallback to the city bounds
+        int width = landSize.x > 0 ? landSize.x : cityWidth;
+        int length = landSize.y > 0 ? landSize.y : cityLength;
+
+        // Create a temporary list to hold ground jobs
+        List<PlacementJob> groundJobs = new List<PlacementJob>();
+
+        // Iterate through the terrain footprint in 4x4 chunks
+        for (int x = 0; x < width; x += 4)
+        {
+            for (int y = 0; y < length; y += 4)
+            {
+                // Ensure we don't check outside the mathematical city bounds
+                bool isRiver = false;
+                if (x < cityWidth && y < cityLength)
+                {
+                    // Since both ground and river chunks are aligned to the 4x4 grid, 
+                    // checking the origin tile of the chunk is sufficient.
+                    if (cityGrid[x, y] == CellType.River)
+                    {
+                        isRiver = true;
+                    }
+                }
+
+                // If a river exists here, do not place ground so the lower layer shows through
+                if (isRiver) continue;
+
+                // Roll a weighted random number (0 to 99)
+                int roll = Random.Range(0, 100);
+                int cumulative = 0;
+                StructureData selectedPattern = patterns[0]; // Fallback to first pattern
+
+                for (int i = 0; i < percentages.Count; i++)
+                {
+                    cumulative += percentages[i];
+                    if (roll < cumulative)
+                    {
+                        selectedPattern = patterns[i];
+                        break;
+                    }
+                }
+
+                if (selectedPattern != null)
+                {
+                    // Add to our temporary ground queue
+                    groundJobs.Add(new PlacementJob
+                    {
+                        data = selectedPattern,
+                        position = new Vector3Int(x, y, 0)
+                    });
+                }
+            }
+        }
+
+        // PREPEND the ground jobs to the main placement queue.
+        // This guarantees the ground is stamped FIRST, so the roads correctly stamp over it!
+        groundJobs.AddRange(placementQueue);
+        placementQueue = groundJobs;
+    }
+
     private void GenerateRiver()
     {
-        if(!riverEnabled) return;
+        if (!riverEnabled) return;
 
         int startX = 0, startY = 0;
         
@@ -345,7 +431,7 @@ public class ProceduralCityGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks if a mathematical rectangle on the grid is entirely empty.
+    /// Checks if a footprint on the grid is empty.
     /// </summary>
     private bool CheckAreaEmpty(int startX, int startY, int width, int height)
     {
@@ -360,7 +446,7 @@ public class ProceduralCityGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Claims the space on the mathematical grid, and adds the structure to the placement queue.
+    /// Claims the space on the grid and adds the structure to the placement queue.
     /// </summary>
     private void MarkGridAndQueue(int startX, int startY, int width, int height, CellType type, StructureData data)
     {
