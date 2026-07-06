@@ -11,7 +11,7 @@ public class StructurePlacer : MonoBehaviour
 
     [Header("Tilemaps")]
     [Tooltip("Place the scene tilemaps here, where index 0 is structure layer 0, etc.")]
-    [SerializeField] public List<Tilemap> targetTileMaps;
+    [SerializeField] public List<Tilemap> targetTilemaps;
 
     //A dictionary for mapping sprites to Unity tiles quickly.
     private Dictionary<Sprite, Tile> tileCache = new Dictionary<Sprite, Tile>();
@@ -31,16 +31,16 @@ public class StructurePlacer : MonoBehaviour
         }
 
         //warning if the data has more layers than the scene
-        if (targetTileMaps.Count < structure.layers.Count)
+        if (targetTilemaps.Count < structure.layers.Count)
         {
             Debug.LogWarning("Top layers of structure are cut off due to scene not containing as many");
         }
 
-        int layerCount = Mathf.Min(structure.layers.Count, targetTileMaps.Count);
+        int layerCount = Mathf.Min(structure.layers.Count, targetTilemaps.Count);
 
         for (int i = 0; i < layerCount; i++)
         {
-            Tilemap currentMap = targetTileMaps[i];
+            Tilemap currentMap = targetTilemaps[i];
 
             LayerData layerData = structure.layers[i];
 
@@ -113,13 +113,13 @@ public class StructurePlacer : MonoBehaviour
     [ContextMenu("Clear All Layers")]
     public void clearTestTilemaps()
     {
-        if (targetTileMaps == null || targetTileMaps.Count == 0)
+        if (targetTilemaps == null || targetTilemaps.Count == 0)
         {
             Debug.LogWarning("No target tilemaps assigned to clear.");
             return;
         }
 
-        foreach (Tilemap tilemap in targetTileMaps)
+        foreach (Tilemap tilemap in targetTilemaps)
         {
             if (tilemap == null)
             {
