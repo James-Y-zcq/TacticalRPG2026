@@ -29,10 +29,18 @@ public class ProceduralCityGenerator : MonoBehaviour
     [Header("4x4 Chunk Data")]
     public StructureData riverChunk;
     public StructureData wallChunk;
-    private StructureData wallCorner;
     public StructureData gatehouseChunk;
     public StructureData roadChunk;
     public StructureData bridgeChunk;
+
+    [Header("Wall Outcroppings")]
+    public bool enableOutcroppings = true;
+    [Tooltip("How many bastions/outcroppings to attempt to place across all walls.")]
+    public int numOutcroppings = 8;
+    public int minOutcroppingLength = 6;
+    public int maxOutcroppingLength = 14;
+    public int minOutcroppingDepth = 3;
+    public int maxOutcroppingDepth = 6;
 
     [Header("Buildings")]
     [SerializeField] bool walledCity = true;
@@ -62,7 +70,7 @@ public class ProceduralCityGenerator : MonoBehaviour
     {
         if (placer == null) placer = GetComponent<StructurePlacer>();
 
-        // 1. Initialize empty grid
+        // Initialize empty grid
         cityGrid = new CellType[cityWidth, cityLength];
         placementQueue.Clear();
 
@@ -72,7 +80,7 @@ public class ProceduralCityGenerator : MonoBehaviour
             if (tm != null) tm.ClearAllTiles();
         }
 
-        // 2. Generate Layout Math
+        // Generate Layout Math
         if (riverEnabled) GenerateRiver();
         if (walledCity) GenerateWallsAndGates();
         
@@ -84,7 +92,7 @@ public class ProceduralCityGenerator : MonoBehaviour
         GenerateMainRoads();
         GenerateBuildings();
 
-        // 3. Execute Placements visually
+        // Execute Placements visually
         foreach (PlacementJob job in placementQueue)
         {
             placer.PlaceStructure(job.data, job.position);
@@ -119,7 +127,7 @@ public class ProceduralCityGenerator : MonoBehaviour
         {
             for (int y = 0; y < length; y += 4)
             {
-                // Ensure we don't check outside the mathematical city bounds
+                // Ensure we don't check outside the internal city bounds
                 bool isRiver = false;
                 if (x < cityWidth && y < cityLength)
                 {
@@ -161,8 +169,7 @@ public class ProceduralCityGenerator : MonoBehaviour
             }
         }
 
-        // PREPEND the ground jobs to the main placement queue.
-        // This guarantees the ground is stamped FIRST, so the roads correctly stamp over it!
+        //Stamp the ground first, then add the rest of the placement queue on top of it. This ensures that ground tiles are always below other structures.
         groundJobs.AddRange(placementQueue);
         placementQueue = groundJobs;
     }
@@ -177,7 +184,7 @@ public class ProceduralCityGenerator : MonoBehaviour
         int maxW = (cityWidth / 4) - 1;
         int maxH = (cityLength / 4) - 1;
 
-        // 1. Determine starting location based on overall flow direction
+        // Determine starting location based on overall flow direction
         switch (riverDirection)
         {
             case RiverDirection.North:
@@ -219,7 +226,7 @@ public class ProceduralCityGenerator : MonoBehaviour
         Vector2Int lastStep = Vector2Int.zero;
         int failsafe = 0;
 
-        // 2. Plot the river course until it wanders completely off the grid limits
+        // Plot the river course until it wanders completely off the grid limits
         while (x >= 0 && x < cityWidth && y >= 0 && y < cityLength && failsafe < 1000)
         {
             failsafe++;
@@ -288,76 +295,186 @@ public class ProceduralCityGenerator : MonoBehaviour
 
     private void GenerateWallsAndGates()
     {
-        // 1. Calculate macro chunk boundary coordinates (Multiples of 4)
+        //Calculate macro chunk boundary coordinates (Multiples of 4)
         int minMacroX = 4;
         int maxMacroX = (cityWidth / 4) - 2; // Last chunk index available for walls
         int minMacroY = 4;
         int maxMacroY = (cityLength / 4) - 2;
 
-        // 2. Convert those chunk origins into absolute tile coordinates
+        //Convert those chunk origins into absolute tile coordinates
         int minX = minMacroX * 4;
         int maxX = maxMacroX * 4;
         int minY = minMacroY * 4;
         int maxY = maxMacroY * 4;
 
-        // 3. Find the midpoints for the gates (must remain snapped to 4x4)
+        //Find the midpoints for the gates (must remain snapped to 4x4)
         int midX = ((minMacroX + maxMacroX) / 2) * 4;
         int midY = ((minMacroY + maxMacroY) / 2) * 4;
 
-        // --- Bottom and Top Walls ---
-        for (int x = minX; x <= maxX; x += 1) 
+        //Generate the Offset Arrays for the dynamic bastions/outcroppings
+        int[] topOffsets = new int[maxX - minX + 1];
+        int[] bottomOffsets = new int[maxX - minX + 1];
+        int[] leftOffsets = new int[maxY - minY + 1];
+        int[] rightOffsets = new int[maxY - minY + 1];
+
+        if (enableOutcroppings)
         {
-            // Protect the entire 4-tile span where the gatehouse sits
-            if (x >= midX && x < midX + 4)
+            for (int i = 0; i < numOutcroppings; i++)
             {
-                if (x == midX)
+                int side = Random.Range(0, 4); // 0=Bottom, 1=Top, 2=Left, 3=Right
+                int length = Random.Range(minOutcroppingLength, maxOutcroppingLength + 1);
+                int depth = Random.Range(minOutcroppingDepth, maxOutcroppingDepth + 1);
+                
+                int arrayLen = (side == 0 || side == 1) ? bottomOffsets.Length : leftOffsets.Length;
+                
+                // Keep 4 tiles clear from the corners to prevent weird overlaps
+                if (arrayLen - length - 4 <= 4) continue; // Array too small for this feature
+                int startIdx = Random.Range(4, arrayLen - length - 4);
+                
+                // Protect the gatehouses! (Give them a 2 tile buffer)
+                int gateStart = (side == 0 || side == 1) ? midX - minX : midY - minY;
+                int gateEnd = gateStart + 4;
+                if (startIdx < gateEnd + 2 && startIdx + length > gateStart - 2) continue;
+                
+                // Apply the depth offset to the array
+                int[] targetArray = side == 0 ? bottomOffsets : side == 1 ? topOffsets : side == 2 ? leftOffsets : rightOffsets;
+                for (int j = startIdx; j < startIdx + length; j++)
                 {
-                    MarkGridAndQueue(x, minY, 4, 4, CellType.Gate, gatehouseChunk);
-                    MarkGridAndQueue(x, maxY, 4, 4, CellType.Gate, gatehouseChunk);
+                    targetArray[j] = Mathf.Max(targetArray[j], depth);
                 }
-            }
-            else
-            {
-                // Place continuous 1x1 walls if there isn't a river blocking the spot
-                if (cityGrid[x, minY] != CellType.River) MarkGridAndQueue(x, minY, 1, 1, CellType.Wall, wallChunk);
-                if (cityGrid[x, maxY] != CellType.River) MarkGridAndQueue(x, maxY, 1, 1, CellType.Wall, wallChunk);
             }
         }
 
-        // --- Left and Right Walls ---
-        for (int y = minY + 1; y < maxY; y += 1) // Start at +1 to avoid corner overlaps
+        // bottom wall
+        int prevY_Bottom = minY - bottomOffsets[0];
+        for (int x = minX; x <= maxX; x++) 
         {
-            // Protect the entire 4-tile span where the side gatehouse sits
+            int currentY = minY - bottomOffsets[x - minX];
+
+            if (x >= midX && x < midX + 4)
+            {
+                if (x == midX) MarkGridAndQueue(x, minY, 4, 4, CellType.Gate, gatehouseChunk);
+                prevY_Bottom = minY;
+                continue;
+            }
+
+            // Draw vertical 90-degree connecting walls if the offset changed
+            if (currentY < prevY_Bottom) 
+            {
+                // Stepped outward (down)
+                for (int stepY = prevY_Bottom - 1; stepY >= currentY; stepY--)
+                    if (cityGrid[x - 1, stepY] != CellType.River) MarkGridAndQueue(x - 1, stepY, 1, 1, CellType.Wall, wallChunk);
+            }
+            else if (currentY > prevY_Bottom) 
+            {
+                // Stepped inward (up)
+                for (int stepY = prevY_Bottom; stepY < currentY; stepY++)
+                    if (cityGrid[x, stepY] != CellType.River) MarkGridAndQueue(x, stepY, 1, 1, CellType.Wall, wallChunk);
+            }
+
+            // Draw horizontal wall segment
+            if (cityGrid[x, currentY] != CellType.River) MarkGridAndQueue(x, currentY, 1, 1, CellType.Wall, wallChunk);
+            prevY_Bottom = currentY;
+        }
+
+        // top wall
+        int prevY_Top = maxY + topOffsets[0];
+        for (int x = minX; x <= maxX; x++) 
+        {
+            int currentY = maxY + topOffsets[x - minX];
+
+            if (x >= midX && x < midX + 4)
+            {
+                if (x == midX) MarkGridAndQueue(x, maxY, 4, 4, CellType.Gate, gatehouseChunk);
+                prevY_Top = maxY;
+                continue;
+            }
+
+            if (currentY > prevY_Top) 
+            {
+                for (int stepY = prevY_Top + 1; stepY <= currentY; stepY++)
+                    if (cityGrid[x - 1, stepY] != CellType.River) MarkGridAndQueue(x - 1, stepY, 1, 1, CellType.Wall, wallChunk);
+            }
+            else if (currentY < prevY_Top) 
+            {
+                for (int stepY = prevY_Top; stepY > currentY; stepY--)
+                    if (cityGrid[x, stepY] != CellType.River) MarkGridAndQueue(x, stepY, 1, 1, CellType.Wall, wallChunk);
+            }
+
+            if (cityGrid[x, currentY] != CellType.River) MarkGridAndQueue(x, currentY, 1, 1, CellType.Wall, wallChunk);
+            prevY_Top = currentY;
+        }
+
+        //left wall
+        int prevX_Left = minX; // Safe to start at minX because corners are protected from offsets
+        for (int y = minY + 1; y < maxY; y++) // Start at +1 to avoid corner overlap
+        {
+            int currentX = minX - leftOffsets[y - minY];
+
             if (y >= midY && y < midY + 4)
             {
-                if (y == midY)
-                {
-                    MarkGridAndQueue(minX, y, 4, 4, CellType.Gate, gatehouseChunk);
-                    MarkGridAndQueue(maxX, y, 4, 4, CellType.Gate, gatehouseChunk);
-                }
+                if (y == midY) MarkGridAndQueue(minX, y, 4, 4, CellType.Gate, gatehouseChunk);
+                prevX_Left = minX;
+                continue;
             }
-            else
+
+            if (currentX < prevX_Left)
             {
-                // Check if the area is empty before placing to prevent overlapping corners
-                if (cityGrid[minX, y] == CellType.Empty) MarkGridAndQueue(minX, y, 1, 1, CellType.Wall, wallChunk);
-                if (cityGrid[maxX, y] == CellType.Empty) MarkGridAndQueue(maxX, y, 1, 1, CellType.Wall, wallChunk);
+                for (int stepX = prevX_Left - 1; stepX >= currentX; stepX--)
+                    if (cityGrid[stepX, y - 1] != CellType.River) MarkGridAndQueue(stepX, y - 1, 1, 1, CellType.Wall, wallChunk);
             }
+            else if (currentX > prevX_Left)
+            {
+                for (int stepX = prevX_Left; stepX < currentX; stepX++)
+                    if (cityGrid[stepX, y] != CellType.River) MarkGridAndQueue(stepX, y, 1, 1, CellType.Wall, wallChunk);
+            }
+
+            if (cityGrid[currentX, y] != CellType.River) MarkGridAndQueue(currentX, y, 1, 1, CellType.Wall, wallChunk);
+            prevX_Left = currentX;
+        }
+
+        //right wall
+        int prevX_Right = maxX; 
+        for (int y = minY + 1; y < maxY; y++) 
+        {
+            int currentX = maxX + rightOffsets[y - minY];
+
+            if (y >= midY && y < midY + 4)
+            {
+                if (y == midY) MarkGridAndQueue(maxX, y, 4, 4, CellType.Gate, gatehouseChunk);
+                prevX_Right = maxX;
+                continue;
+            }
+
+            if (currentX > prevX_Right)
+            {
+                for (int stepX = prevX_Right + 1; stepX <= currentX; stepX++)
+                    if (cityGrid[stepX, y - 1] != CellType.River) MarkGridAndQueue(stepX, y - 1, 1, 1, CellType.Wall, wallChunk);
+            }
+            else if (currentX < prevX_Right)
+            {
+                for (int stepX = prevX_Right; stepX > currentX; stepX--)
+                    if (cityGrid[stepX, y] != CellType.River) MarkGridAndQueue(stepX, y, 1, 1, CellType.Wall, wallChunk);
+            }
+
+            if (cityGrid[currentX, y] != CellType.River) MarkGridAndQueue(currentX, y, 1, 1, CellType.Wall, wallChunk);
+            prevX_Right = currentX;
         }
     }
 
     private void GenerateMainRoads()
     {
-        // 1. Calculate macro chunk boundary coordinates (identical to walls)
+        // Calculate macro chunk boundary coordinates (identical to walls)
         int minMacroX = 4;
         int maxMacroX = (cityWidth / 4) - 2;
         int minMacroY = 4;
         int maxMacroY = (cityLength / 4) - 2;
 
-        // 2. Find the exact same midpoints
+        // Find the exact same midpoints
         int midX = ((minMacroX + maxMacroX) / 2) * 4;
         int midY = ((minMacroY + maxMacroY) / 2) * 4;
 
-        // 3. Roads start just inside the gates
+        // Roads start just inside the gates
         int minX = (minMacroX + 1) * 4;
         int maxX = (maxMacroX - 1) * 4;
         int minY = (minMacroY + 1) * 4;
@@ -431,7 +548,7 @@ public class ProceduralCityGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks if a footprint on the grid is empty.
+    /// Checks if a mathematical rectangle on the grid is entirely empty.
     /// </summary>
     private bool CheckAreaEmpty(int startX, int startY, int width, int height)
     {
@@ -446,13 +563,16 @@ public class ProceduralCityGenerator : MonoBehaviour
     }
 
     /// <summary>
-    /// Claims the space on the grid and adds the structure to the placement queue.
+    /// Claims the space on the mathematical grid, and adds the structure to the placement queue.
     /// </summary>
     private void MarkGridAndQueue(int startX, int startY, int width, int height, CellType type, StructureData data)
     {
         if (data == null) return;
 
-        // 1. Claim the area on our virtual math grid so nothing else spawns here
+        // Prevent arrays from going out of bounds if an extreme offset pushes placement too far!
+        if (startX < 0 || startY < 0 || startX + width > cityWidth || startY + height > cityLength) return;
+
+        //Claim the area on our virtual math grid so nothing else spawns here
         for (int x = startX; x < startX + width; x++)
         {
             for (int y = startY; y < startY + height; y++)
@@ -461,7 +581,7 @@ public class ProceduralCityGenerator : MonoBehaviour
             }
         }
 
-        // 2. Add to queue for the Placer to handle visually later
+        //Add to queue for the Placer to handle visually later
         placementQueue.Add(new PlacementJob
         {
             data = data,
