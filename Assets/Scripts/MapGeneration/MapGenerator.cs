@@ -27,20 +27,21 @@ public class ProceduralCityGenerator : MonoBehaviour
     public float riverMeanderChance = 0.2f;
 
     [Header("4x4 Chunk Data")]
-    public StructureData riverChunk;
-    public StructureData wallChunk;
-    public StructureData gatehouseChunk;
-    public StructureData roadChunk;
-    public StructureData bridgeChunk;
+    public StructureData riverChunk; //4x4 water chunk for the river
+    public StructureData wallChunk; //1x1 chunk for wall segments
+    public StructureData gatehouseChunk; //chunk used for the gatehouse structure
+    public StructureData roadChunk; //4x4 chunk for the large road
+    public StructureData sideRoadChunk; //1x1 chunk that connects the main roads to placed structures.
+    public StructureData bridgeChunk; //4x4 for the road crossing over the river.
 
     [Header("Wall Outcroppings")]
     public bool enableOutcroppings = true;
-    [Tooltip("How many bastions/outcroppings to attempt to place across all walls.")]
-    public int numOutcroppings = 8;
-    public int minOutcroppingLength = 6;
-    public int maxOutcroppingLength = 14;
-    public int minOutcroppingDepth = 3;
-    public int maxOutcroppingDepth = 6;
+    [Tooltip("How many outcroppings to attempt to place across all walls.")]
+    [Range(0,10)] public int numOutcroppings = 8;
+    [Range(0,32)] public int minOutcroppingLength = 6;
+    [Range(0, 32)]public int maxOutcroppingLength = 14;
+    [Range(0,16)] public int minOutcroppingDepth = 3;
+    [Range(0, 16)] public int maxOutcroppingDepth = 6;
 
     [Header("Buildings")]
     [SerializeField] bool walledCity = true;
@@ -545,6 +546,16 @@ public class ProceduralCityGenerator : MonoBehaviour
             
             // If we couldn't place it after many attempts, the city might be getting full.
         }
+    }
+
+    /// <summary>
+    /// Generates side roads that connect to main and lead to buildings. May also connect to another side path, creating alleyways.
+    /// </summary>
+    private void GenerateSmallRoads(List<RectInt> buildings)
+    {
+        if(sideRoadChunk == null) return;
+
+        //foreach(RectInt)
     }
 
     /// <summary>
